@@ -23,9 +23,11 @@ export class Unit extends Point {
 		super(x,y);
 
 		this.ground = y;
+		this.sprite = SpritesManager.SPRITE.IDLE[0];
 	}
 
 	stop(){
+	    this.sprite = SpritesManager.SPRITE.IDLE[0];
 		this.vel[0] = 0;
 	}
 
@@ -71,13 +73,28 @@ export class Unit extends Point {
 		}  
 	}
 
-	render(scene, sprites){
-	    const sprite = SpritesManager.SPRITE.IDLE;
+	render(scene, sprites, time){
+	    let sprite;
+
+	    switch (true){
+            case Math.abs(this.vel[0]) > 0 :
+                sprite = SpritesManager.SPRITE.RUN[0][Math.ceil(time % 100 / 10) % 2];
+                break;
+            default:
+                sprite = SpritesManager.SPRITE.IDLE[0];
+        }
+
+        if(!this.isOnGround()){
+	        sprite = SpritesManager.SPRITE.IDLE[0];
+        }
 
         const x = this.pos[0] - sprite[2]/2;
         const y = this.pos[1] - sprite[3];
 
-		return scene.sprite(sprites.copy(...sprite), x, y)
+        const result = sprites.copy(...sprite);
+
+
+		return scene.sprite(result, x, y)
 	}
 }
 

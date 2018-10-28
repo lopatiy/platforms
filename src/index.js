@@ -30,18 +30,19 @@ class Application {
 
     bootstrap() {
         this.place();
-        interval = setInterval(() => this.render(), 1000/24)
+        let time = 1000;
+       interval = setInterval(() => this.render(time++), 1000/24)
     }
 
     place(){
         unit = new ControllableUnit(this.w/2, 3*this.h/4);
     }
 
-    render(){
+    render(time){
         this.scene.clear();
         this.scene.line(0, 3*this.h/4, this.w, 3*this.h/4);
         unit.update();
-        unit.render(this.scene, this.spritesManager);
+        unit.render(this.scene, this.spritesManager, time);
     }
 }
 

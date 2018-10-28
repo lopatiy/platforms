@@ -1,14 +1,21 @@
 export default class SpritesManager {
 	static spriteSheet = [
         [0, 0, 36, 47],
-        [0, 0, 72, 47],
-        [0, 0, 108, 47]
+        [36, 0, 36, 47],
+        [72, 0, 36, 47],
+
+        [0, 47, 36, 94],
+        [36, 47, 36, 94],
+        [72, 47, 36, 94]
     ];
 
 	static SPRITE = {
-		IDLE : SpritesManager.spriteSheet[0],
-		RUN_0 : SpritesManager.spriteSheet[0],
-		RUN_1 : SpritesManager.spriteSheet[0]
+		IDLE : [
+            SpritesManager.spriteSheet[0], // left,
+		],
+		RUN : [
+            [SpritesManager.spriteSheet[1], SpritesManager.spriteSheet[2]], // left
+		]
 	};
 
 	constructor(url, callback){
