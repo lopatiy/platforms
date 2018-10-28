@@ -1,4 +1,4 @@
-class Scene {
+export default class Scene {
     constructor(canvas) {
         this.canvas = canvas;
         this.cc = this.canvas.getContext('2d');

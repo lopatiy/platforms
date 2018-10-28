@@ -1,40 +1,48 @@
+import Scene from "./scene";
+import SpritesManager from "./sprites";
+import {ControllableUnit} from "./point";
+
 let unit;
 let interval;
-const sprites = new SpritesManager(
-	"./hero.png",
-	() => {
-		const canvas = document.getElementById("canvas");
-		const ctx = canvas.getContext('2d');
 
-		let h = document.body.scrollHeight,
-		w = document.body.getBoundingClientRect().width;
+class Application {
+    constructor(){
+        this.canvas = document.getElementById("canvas");
+        this.ctx = this.canvas.getContext('2d');
 
-		const scene = new Scene(canvas);
+        this.h = document.body.scrollHeight;
+        this.w = document.body.getBoundingClientRect().width;
 
-		canvas.height = h;
-		canvas.width = w; 
+        this.scene = new Scene(this.canvas);
 
-		ctx.fillStyle = "white";
-		ctx.fillRect(0,0, w, h);
-		ctx.fill();
+        this.canvas.height = this.h;
+        this.canvas.width = this.w;
 
-		scene.fill('black');
-		scene.stroke('black');
+        this.ctx.fillStyle = "white";
+        this.ctx.fillRect(0,0, this.w, this.h);
+        this.ctx.fill();
 
-		place(scene, w,h);
+        this.scene.fill('black');
+        this.scene.stroke('black');
 
-		interval = setInterval(() => render(scene, w, h), 1000/24)
-	}
-	);
+        this.spritesManager = new SpritesManager("../assets/hero.png", this.bootstrap.bind(this));
+    }
 
+    bootstrap() {
+        this.place();
+        interval = setInterval(() => this.render(), 1000/24)
+    }
 
-function place(scene, w,h){
-	unit = new Unit(w/2, 3*h/4);
+    place(){
+        unit = new ControllableUnit(this.w/2, 3*this.h/4);
+    }
+
+    render(){
+        this.scene.clear();
+        this.scene.line(0, 3*this.h/4, this.w, 3*this.h/4);
+        unit.update();
+        unit.render(this.scene);
+    }
 }
 
-function render(scene, w, h){
-	scene.clear();
-	scene.line(0, 3*h/4, w, 3*h/4)
-	unit.update();
-	unit.render(scene);	
-}
+window.app = new Application();

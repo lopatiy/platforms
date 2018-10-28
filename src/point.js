@@ -1,7 +1,9 @@
+import {summ, mult, subt} from "./fn";
+
 const gravity = [0, 0.5];
 const f = 3;
 
-class Point {
+export class Point {
 	constructor(x,y){
 		this.pos = [x,y];
 
@@ -15,7 +17,7 @@ class Point {
 	}
 }
 
-class Unit extends Point {
+export class Unit extends Point {
 	constructor(x,y){
 		super(x,y);
 
@@ -69,36 +71,36 @@ class Unit extends Point {
 	}
 
 	render(scene){
-
+		return scene.ellipse(this.pos[0], this.pos[1], 3)
 	}
 }
 
-class ControlableUnit extends Unit {
-	consttuctor(x,y){
+export class ControllableUnit extends Unit {
+	constructor(x,y){
 		super(x,y);
 
 		document.addEventListener('keydown', (e) => {
 			switch(e.keyCode) {
-				case 37: unit.left();
+				case 37: this.left();
 				break;
-				case 39: unit.right();
+				case 39: this.right();
 				break;
-				case 38: unit.jump();
+				case 38: this.jump();
 				break;
-				case 40: unit.duck();
+				case 40: this.duck();
 				break;
 				default:
 			}
-		})
+		});
 
 		document.addEventListener('keyup', (e) => {
 			switch(e.keyCode) {
 				case 37: 
-				case 39: unit.stop(); 
+				case 39: this.stop(); 
 				break;
-				case 38: unit.duck()
+				case 38: this.duck();
 				break;
-				case 40: unit.jump();
+				case 40: this.jump();
 				break;
 				default:
 			}
