@@ -1,4 +1,5 @@
 import {summ, mult, subt} from "./fn";
+import SpritesManager from "./sprites";
 
 const gravity = [0, 0.5];
 const f = 3;
@@ -70,8 +71,13 @@ export class Unit extends Point {
 		}  
 	}
 
-	render(scene){
-		return scene.ellipse(this.pos[0], this.pos[1], 3)
+	render(scene, sprites){
+	    const sprite = SpritesManager.SPRITE.IDLE;
+
+        const x = this.pos[0] - sprite[2]/2;
+        const y = this.pos[1] - sprite[3];
+
+		return scene.sprite(sprites.copy(...sprite), x, y)
 	}
 }
 

@@ -1,17 +1,23 @@
 export default class SpritesManager {
-	constructor(url, callback){
-		this.spritesSheet = [
-			[0, 0, 36, 47],
-			[0, 0, 72, 47],
-			[0, 0, 108, 47]
-		];
+	static spriteSheet = [
+        [0, 0, 36, 47],
+        [0, 0, 72, 47],
+        [0, 0, 108, 47]
+    ];
 
+	static SPRITE = {
+		IDLE : SpritesManager.spriteSheet[0],
+		RUN_0 : SpritesManager.spriteSheet[0],
+		RUN_1 : SpritesManager.spriteSheet[0]
+	};
+
+	constructor(url, callback){
 		this.load(url, 108, 47, callback)
 	}
 
 	load(url, width, height, callback) {
    		const image = document.createElement('img');
-    	image.onload = function () {
+    	image.onload = () => {
         	const canvas = document.createElement('canvas');
         	canvas.width = width;
         	canvas.height = height;
@@ -27,7 +33,7 @@ export default class SpritesManager {
     	image.src = url + '?' + new Date().getTime();
 	}
 
-	copy(){
-	 	return ctx.getImageData(10,10,50,50);
+	copy(...data){
+	 	return this.ctx.getImageData(...data);
 	}
 }

@@ -17,12 +17,5 @@ module.exports = {
                 }
             }
         ]
-    },
-    devServer: {
-        contentBase: path.resolve(__dirname, "./dist/assets"),
-        compress: true,
-        port: 12000,
-        stats: 'errors-only',
-        open: true
-    },
+    }
 };

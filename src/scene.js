@@ -43,6 +43,10 @@ export default class Scene {
         this.cc.stroke();
     }
 
+    sprite(sprite, x, y){
+        this.cc.putImageData(sprite, x, y);
+    }
+
     shape(points) {
         this.cc.beginPath();
         this.cc.moveTo(points[0].x, points[0].y);

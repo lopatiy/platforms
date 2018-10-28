@@ -41,7 +41,7 @@ class Application {
         this.scene.clear();
         this.scene.line(0, 3*this.h/4, this.w, 3*this.h/4);
         unit.update();
-        unit.render(this.scene);
+        unit.render(this.scene, this.spritesManager);
     }
 }
 
