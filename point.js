@@ -1,26 +1,3 @@
-var x = null;
-var y = null;
-    
-document.addEventListener('mousemove', onMouseUpdate, false);
-document.addEventListener('mouseenter', onMouseUpdate, false);
-    
-function onMouseUpdate(e) {
-  x = e.pageX;
-  y = e.pageY;
-}
-
-const summ = (v1,v2) => {
-	return [v1[0]+v2[0], v1[1] + v2[1]];
-}
-
-const subt = (v1,v2) => {
-	return [v1[0] - v2[0], v1[1] - v2[1]];
-}
-
-const mult = (v1, n1, n2) => {
-	return [v1[0] * n1, v1[1] * (n2 ? n2 : n1)];
-}
-
 const gravity = [0, 0.5];
 const f = 3;
 
@@ -90,5 +67,41 @@ class Unit extends Point {
 			this.pos[1] = this.ground;
 		}  
 	}
+
+	render(scene){
+
+	}
 }
 
+class ControlableUnit extends Unit {
+	consttuctor(x,y){
+		super(x,y);
+
+		document.addEventListener('keydown', (e) => {
+			switch(e.keyCode) {
+				case 37: unit.left();
+				break;
+				case 39: unit.right();
+				break;
+				case 38: unit.jump();
+				break;
+				case 40: unit.duck();
+				break;
+				default:
+			}
+		})
+
+		document.addEventListener('keyup', (e) => {
+			switch(e.keyCode) {
+				case 37: 
+				case 39: unit.stop(); 
+				break;
+				case 38: unit.duck()
+				break;
+				case 40: unit.jump();
+				break;
+				default:
+			}
+		})
+	}
+}
