@@ -22,7 +22,10 @@ class Application {
     bootstrap() {
         this.place();
         let time = 1000;
-       interval = setInterval(() => this.render(time++), 1000/24)
+        this.render(time);
+        this.scene.cc.putImageData(this.spritesManager.ctx.getImageData(0,0,this.w, this.h),0,0)
+
+        interval = setInterval(() => this.render(time++), 1000/24)
     }
 
     place(){

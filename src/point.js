@@ -22,6 +22,7 @@ export class Unit extends Point {
 	constructor(x,y){
 		super(x,y);
 
+		this.dir = 1;
 		this.ground = y;
 		this.sprite = SpritesManager.SPRITE.IDLE[0];
 	}
@@ -32,10 +33,12 @@ export class Unit extends Point {
 	}
 
 	left(){
+	    this.dir = 0;
 		this.vel[0] = -1 * f;
 	}
 
 	right(){
+        this.dir = 1;
 		this.vel[0] = 1 * f;
 	}
 
@@ -78,14 +81,14 @@ export class Unit extends Point {
 
 	    switch (true){
             case Math.abs(this.vel[0]) > 0 :
-                sprite = SpritesManager.SPRITE.RUN[0][Math.ceil(time % 100 / 10) % 2];
+                sprite = SpritesManager.SPRITE.RUN[Math.ceil(time % 100 / 10) % 2][this.dir];
                 break;
             default:
-                sprite = SpritesManager.SPRITE.IDLE[0];
+                sprite = SpritesManager.SPRITE.IDLE[this.dir];
         }
 
         if(!this.isOnGround()){
-	        sprite = SpritesManager.SPRITE.IDLE[0];
+	        sprite = SpritesManager.SPRITE.IDLE[this.dir];
         }
 
         const x = this.pos[0] - sprite[2]/2;
