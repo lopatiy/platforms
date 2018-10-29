@@ -13,7 +13,7 @@ export class Point {
 	}
 
 	update(){
-		this.vel = summ(this.vel, this.acc);	
+		this.vel = summ(this.vel, this.acc);
 		this.pos = summ(this.pos, this.vel);
 	}
 }
@@ -67,10 +67,10 @@ export class Unit extends Point {
 		}
 
 		super.update();
-		
+
 		if(this.pos[1] >= this.ground){
 			this.pos[1] = this.ground;
-		}  
+		}
 	}
 
 	render(scene, sprites, time){
@@ -104,12 +104,16 @@ export class ControllableUnit extends Unit {
 
 		document.addEventListener('keydown', (e) => {
 			switch(e.keyCode) {
+				case 65:
 				case 37: this.left();
 				break;
+				case 68:
 				case 39: this.right();
 				break;
+				case 87:
 				case 38: this.jump();
 				break;
+				case 83:
 				case 40: this.duck();
 				break;
 				default:
@@ -118,12 +122,10 @@ export class ControllableUnit extends Unit {
 
 		document.addEventListener('keyup', (e) => {
 			switch(e.keyCode) {
-				case 37: 
-				case 39: this.stop(); 
-				break;
-				case 38: this.duck();
-				break;
-				case 40: this.jump();
+				case 37:
+                case 65:
+				case 39:
+                case 68: this.stop();
 				break;
 				default:
 			}
