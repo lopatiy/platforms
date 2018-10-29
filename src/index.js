@@ -14,7 +14,7 @@ class Application {
         this.canvas.width = this.w;
 
         this.scene = new Scene(this.canvas);
-        this.spritesManager = new SpritesManager("../assets/hero.png", this.bootstrap.bind(this));
+        this.spritesManager = new SpritesManager("./assets/hero.png", this.bootstrap.bind(this));
 
         this.units = [];
     }
